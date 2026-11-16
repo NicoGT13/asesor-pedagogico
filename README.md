@@ -1,6 +1,6 @@
 # Asesor Pedagógico Inteligente
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Jhiguita11/asesor-pedagogico)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/NicoGT13/asesor-pedagogico)
 
 Plataforma web de **evaluación y retroalimentación asistida por IA** para las Cohortes 1 y 2 del curso
 *Profundización I – Inteligencia Artificial* · Ingeniería de Sistemas y Telecomunicaciones · **Universidad de Manizales**.
