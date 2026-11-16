@@ -1,0 +1,24 @@
+# --- Framework web / servidor ASGI ---
+fastapi==0.163.1
+uvicorn[standard]==0.54.0
+gunicorn==27.0.1
+python-multipart==0.0.32
+
+# --- Validación y configuración ---
+pydantic==2.13.5
+pydantic-settings==2.16.3
+email-validator==2.4.0
+
+# --- Persistencia (SQLAlchemy async: SQLite local / PostgreSQL en Render) ---
+SQLAlchemy[asyncio]==2.1.9
+aiosqlite==0.22.1
+asyncpg==0.32.0
+
+# --- Seguridad ---
+PyJWT==2.15.0
+bcrypt==5.0.0
+
+# --- IA, documentos y reportes ---
+httpx==0.28.1
+pypdf==6.17.0
+fpdf2==2.9.0

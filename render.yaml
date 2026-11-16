@@ -1,0 +1,35 @@
+# Render Blueprint — despliegue con un clic: Dashboard → New → Blueprint → seleccionar el repo.
+services:
+  - type: web
+    name: asesor-pedagogico
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true            # CI/CD: cada `git push origin main` redepliega
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: asesor-pedagogico-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true     # Render genera una clave aleatoria segura
+      - key: ENVIRONMENT
+        value: production
+      - key: WEB_CONCURRENCY
+        value: "2"              # plan free = 512 MB RAM: 2 workers es lo prudente
+      - key: AI_PROVIDER
+        value: mock             # cambie a "openai" cuando agregue OPENAI_API_KEY
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_API_KEY
+        sync: false             # se solicita en el dashboard; nunca se versiona
+      - key: SEED_DEMO_DATA
+        value: "true"
+
+databases:
+  - name: asesor-pedagogico-db
+    plan: free
+    databaseName: asesor_pedagogico
+    user: asesor

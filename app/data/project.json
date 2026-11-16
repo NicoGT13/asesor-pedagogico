@@ -1,0 +1,38 @@
+{
+  "title": "Asesor Pedagógico Inteligente",
+  "subtitle": "Plataforma web de evaluación y retroalimentación asistida por IA para las Cohortes 1 y 2",
+  "institution": "Universidad de Manizales",
+  "faculty": "Facultad de Ciencias e Ingeniería",
+  "program": "Ingeniería de Sistemas y Telecomunicaciones — Octavo Semestre",
+  "course": "Profundización I — Inteligencia Artificial",
+  "year": 2026,
+  "abstract": "El Asesor Pedagógico Inteligente es una plataforma web que automatiza y potencia la evaluación, la retroalimentación y el seguimiento del aprendizaje en dos cohortes prácticas de Inteligencia Artificial. El sistema recibe evidencias académicas (informes PDF, código fuente en ZIP y repositorios GitHub), las contrasta con rúbricas parametrizadas cuya sumatoria de ponderaciones se valida matemáticamente al 100 % y las somete a un modelo de lenguaje cuya salida se restringe a un esquema JSON estricto validado con Pydantic. Como principio de diseño, el LLM nunca calcula la nota final: el backend aplica una fórmula determinista (Σ puntaje parcial × ponderación / 100) con aritmética decimal exacta, garantizando calificaciones objetivas, reproducibles y auditables entre 0,0 y 5,0. Un panel de supervisión docente permite ajustar puntajes parciales con justificación trazable y aprobar la publicación. La plataforma consolida un Informe Integrado del Aprendizaje descargable en PDF —evolución entre cohortes, brechas de conocimiento y plan personalizado de fortalecimiento— y un mapa mental interactivo de competencias en IA.",
+  "objectives": [
+    "Brindar retroalimentación argumentada, detallada y personalizada a partir de evidencias de código e informes.",
+    "Garantizar rigor y confiabilidad: calificación determinista en backend, libre de sesgos del modelo de lenguaje.",
+    "Demostrar ingeniería de software profesional: arquitectura limpia, seguridad RBAC/JWT, pruebas automatizadas y despliegue cloud con CI/CD."
+  ],
+  "architecture": [
+    {"layer": "Presentación", "tech": "SPA HTML5 + Tailwind CSS + JavaScript (Chart.js, D3.js)", "detail": "Interfaz responsiva servida por el propio backend con assets precompilados: despliegue en un único Web Service, sin CDNs."},
+    {"layer": "API", "tech": "FastAPI (ASGI asíncrono) + Gunicorn/Uvicorn", "detail": "REST con OpenAPI/Swagger, JWT y control de acceso por roles."},
+    {"layer": "Dominio", "tech": "Servicios puros en Python", "detail": "Validador de rúbricas (100 %), motor de calificación determinista (Decimal), analítica y mapa de competencias."},
+    {"layer": "IA", "tech": "LLM vía Structured Outputs + Pydantic", "detail": "Patrón Strategy: proveedor OpenAI-compatible o motor determinista de respaldo."},
+    {"layer": "Persistencia", "tech": "SQLAlchemy 2 async — SQLite (local) / PostgreSQL (Render)", "detail": "Modelo relacional con JSONB para rúbricas y salidas de IA, más bitácora de auditoría."}
+  ],
+  "contributions": [
+    "Separación estricta entre juicio cualitativo (IA) y cálculo cuantitativo (backend).",
+    "Validación de esquemas con extra='forbid' y verificación cruzada contra la rúbrica.",
+    "Análisis estático seguro de código estudiantil (anti Zip-Slip / Zip-Bomb, sin ejecución).",
+    "Trazabilidad completa: salida cruda de IA inmutable, ajustes docentes justificados y bitácora."
+  ],
+  "team": [
+    {
+      "name": "Sergio Sánchez Arango",
+      "role": "Autor y Desarrollador Principal — Arquitectura, Backend, IA y Despliegue",
+      "photo": "/static/img/team/sergio.jpg",
+      "highlight": true,
+      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Responsable del diseño del SRS, la arquitectura limpia, el motor de evaluación determinista y la integración con modelos de lenguaje.",
+      "links": {}
+    }
+  ]
+}
