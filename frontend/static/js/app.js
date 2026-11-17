@@ -258,7 +258,8 @@ window.addEventListener('hashchange', render);
 // ============================================================================ VISTAS
 // ---------------------------------------------------------------- Login / Registro
 async function viewLogin(root) {
-  if (!S.health) S.health = await api('/api/health').catch(() => ({}));
+  // No bloquea el primer pintado: en Render Free /api/health puede tardar durante el cold start
+  if (!S.health) api('/api/health').then((h) => { S.health = h; if (h?.demo_accounts && !S.token && $('#f-login') && !$('[data-demo]')) render(); }).catch(() => {});
   root.innerHTML = `
   <div class="min-h-screen grid lg:grid-cols-2">
     <section class="relative hidden lg:flex flex-col justify-between p-12 bg-slate-950 text-white overflow-hidden">
@@ -899,4 +900,11 @@ async function viewProject(root) {
 }
 
 // ------------------------------------------------------------------ Boot
-window.addEventListener('DOMContentLoaded', render);
+function boot() {
+  render().catch((e) => {
+    console.error(e);
+    $('#app').innerHTML = `<div class="p-10 text-center text-rose-600">No se pudo cargar la aplicación: ${esc(e.message)}. Recargue la página.</div>`;
+  });
+}
+if (document.readyState === 'loading') window.addEventListener('DOMContentLoaded', boot);
+else boot();
