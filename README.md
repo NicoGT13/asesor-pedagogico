@@ -4,7 +4,7 @@
 
 Plataforma web de **evaluación y retroalimentación asistida por IA** para las Cohortes 1 y 2 del curso
 *Profundización I – Inteligencia Artificial* · Ingeniería de Sistemas y Telecomunicaciones · **Universidad de Manizales**.
-Equipo: **Sergio Sánchez Arango** (autor y desarrollador principal) y **Nicolás Giraldo Tobón** (desarrollador).
+Autores: **Nicolás Giraldo Tobón** y **Sergio Sánchez Arango**.
 
 > **Regla de negocio central (RF-207):** el LLM **nunca** calcula la nota final. La IA devuelve puntajes parciales por criterio
 > en un JSON validado con Pydantic (`extra="forbid"`), y el backend aplica

@@ -99,7 +99,8 @@ def test_informe_y_mapa(client, student, teacher):
 
 def test_proyecto_publico(client):
     p = client.get("/api/project").json()
-    assert any(m["name"] == "Sergio Sánchez Arango" and m["highlight"] for m in p["team"])
+    names = {m["name"] for m in p["team"] if m["highlight"]}
+    assert {"Sergio Sánchez Arango", "Nicolás Giraldo Tobón"} <= names
 
 
 def test_spa_servida(client):

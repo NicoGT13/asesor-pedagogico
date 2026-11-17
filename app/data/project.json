@@ -47,21 +47,21 @@
   ],
   "team": [
     {
-      "name": "Sergio Sánchez Arango",
-      "role": "Autor y Desarrollador Principal",
-      "photo": "/static/img/team/sergio.jpg",
+      "name": "Nicolás Giraldo Tobón",
+      "role": "Autor y Desarrollador — Arquitectura, Backend, IA, Frontend y Despliegue",
+      "photo": "/static/img/team/nicolas.jpg",
       "highlight": true,
-      "badge": "★ Autor principal",
-      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Autor del proyecto y del documento de requerimientos (SRS) del Asesor Pedagógico Inteligente.",
+      "badge": "★ Autor",
+      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Coautor del Asesor Pedagógico Inteligente: requerimientos (SRS), arquitectura, backend, motor de evaluación con IA, frontend y despliegue.",
       "links": {}
     },
     {
-      "name": "Nicolás Giraldo Tobón",
-      "role": "Desarrollador",
-      "photo": "/static/img/team/nicolas.jpg",
+      "name": "Sergio Sánchez Arango",
+      "role": "Autor y Desarrollador — Arquitectura, Backend, IA, Frontend y Despliegue",
+      "photo": "/static/img/team/sergio.jpg",
       "highlight": true,
-      "badge": "",
-      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Integrante del equipo desarrollador del Asesor Pedagógico Inteligente.",
+      "badge": "★ Autor",
+      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Coautor del Asesor Pedagógico Inteligente: requerimientos (SRS), arquitectura, backend, motor de evaluación con IA, frontend y despliegue.",
       "links": {}
     }
   ]
