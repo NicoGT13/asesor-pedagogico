@@ -904,7 +904,7 @@ async function viewProject(root) {
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">${p.team.map((m) => `
       <div class="${m.highlight ? 'md:col-span-2 xl:col-span-3' : ''}">${card(`<div class="p-7 flex flex-col ${m.highlight ? 'sm:flex-row' : ''} gap-6 items-center ${m.highlight ? 'bg-gradient-to-br from-brand-50 to-emerald-50 rounded-2xl' : ''}">
         <div class="relative shrink-0"><img src="${esc(m.photo)}" alt="${esc(m.name)}" class="w-40 h-40 rounded-2xl object-cover ring-4 ring-white shadow-lg" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'w-40 h-40 rounded-2xl bg-gradient-to-br from-brand-600 to-emerald-500 grid place-items-center text-5xl font-black text-white ring-4 ring-white shadow-lg',textContent:'${esc(initials(m.name))}'}))"/>
-        ${m.highlight ? '<span class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 text-white text-xs font-bold px-3 py-1 shadow">★ Autor principal</span>' : ''}</div>
+        ${m.badge ? `<span class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 text-white text-xs font-bold px-3 py-1 shadow">${esc(m.badge)}</span>` : ''}</div>
         <div class="${m.highlight ? 'text-center sm:text-left' : 'text-center'}"><h3 class="text-2xl font-extrabold">${esc(m.name)}</h3><p class="text-brand-700 font-semibold mt-1">${esc(m.role)}</p><p class="text-slate-600 mt-3 text-sm leading-relaxed max-w-2xl">${esc(m.bio)}</p></div></div>`)}</div>`).join('')}</div>
     ${!S.token ? `<div class="text-center mt-10"><a href="#/login">${btn('Ingresar a la plataforma')}</a></div>` : ''}`;
   if (!S.token) root.innerHTML = `<div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 fade-in">${html}</div>`;

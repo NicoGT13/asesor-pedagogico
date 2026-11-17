@@ -13,11 +13,31 @@
     "Demostrar ingeniería de software profesional: arquitectura limpia, seguridad RBAC/JWT, pruebas automatizadas y despliegue cloud con CI/CD."
   ],
   "architecture": [
-    {"layer": "Presentación", "tech": "SPA HTML5 + Tailwind CSS + JavaScript (Chart.js, D3.js)", "detail": "Interfaz responsiva servida por el propio backend con assets precompilados: despliegue en un único Web Service, sin CDNs."},
-    {"layer": "API", "tech": "FastAPI (ASGI asíncrono) + Gunicorn/Uvicorn", "detail": "REST con OpenAPI/Swagger, JWT y control de acceso por roles."},
-    {"layer": "Dominio", "tech": "Servicios puros en Python", "detail": "Validador de rúbricas (100 %), motor de calificación determinista (Decimal), analítica y mapa de competencias."},
-    {"layer": "IA", "tech": "LLM vía Structured Outputs + Pydantic", "detail": "Patrón Strategy: proveedor OpenAI-compatible o motor determinista de respaldo."},
-    {"layer": "Persistencia", "tech": "SQLAlchemy 2 async — SQLite (local) / PostgreSQL (Render)", "detail": "Modelo relacional con JSONB para rúbricas y salidas de IA, más bitácora de auditoría."}
+    {
+      "layer": "Presentación",
+      "tech": "SPA HTML5 + Tailwind CSS + JavaScript (Chart.js, D3.js)",
+      "detail": "Interfaz responsiva servida por el propio backend con assets precompilados: despliegue en un único Web Service, sin CDNs."
+    },
+    {
+      "layer": "API",
+      "tech": "FastAPI (ASGI asíncrono) + Gunicorn/Uvicorn",
+      "detail": "REST con OpenAPI/Swagger, JWT y control de acceso por roles."
+    },
+    {
+      "layer": "Dominio",
+      "tech": "Servicios puros en Python",
+      "detail": "Validador de rúbricas (100 %), motor de calificación determinista (Decimal), analítica y mapa de competencias."
+    },
+    {
+      "layer": "IA",
+      "tech": "LLM vía Structured Outputs + Pydantic",
+      "detail": "Patrón Strategy: proveedor OpenAI-compatible o motor determinista de respaldo."
+    },
+    {
+      "layer": "Persistencia",
+      "tech": "SQLAlchemy 2 async — SQLite (local) / PostgreSQL (Render)",
+      "detail": "Modelo relacional con JSONB para rúbricas y salidas de IA, más bitácora de auditoría."
+    }
   ],
   "contributions": [
     "Separación estricta entre juicio cualitativo (IA) y cálculo cuantitativo (backend).",
@@ -28,10 +48,20 @@
   "team": [
     {
       "name": "Sergio Sánchez Arango",
-      "role": "Autor y Desarrollador Principal — Arquitectura, Backend, IA y Despliegue",
+      "role": "Autor y Desarrollador Principal",
       "photo": "/static/img/team/sergio.jpg",
       "highlight": true,
-      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Responsable del diseño del SRS, la arquitectura limpia, el motor de evaluación determinista y la integración con modelos de lenguaje.",
+      "badge": "★ Autor principal",
+      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Autor del proyecto y del documento de requerimientos (SRS) del Asesor Pedagógico Inteligente.",
+      "links": {}
+    },
+    {
+      "name": "Nicolás Giraldo Tobón",
+      "role": "Desarrollador",
+      "photo": "/static/img/team/nicolas.jpg",
+      "highlight": true,
+      "badge": "",
+      "bio": "Estudiante de octavo semestre de Ingeniería de Sistemas y Telecomunicaciones de la Universidad de Manizales. Integrante del equipo desarrollador del Asesor Pedagógico Inteligente.",
       "links": {}
     }
   ]

@@ -4,7 +4,7 @@
 
 Plataforma web de **evaluación y retroalimentación asistida por IA** para las Cohortes 1 y 2 del curso
 *Profundización I – Inteligencia Artificial* · Ingeniería de Sistemas y Telecomunicaciones · **Universidad de Manizales**.
-Autor y desarrollador principal: **Sergio Sánchez Arango**.
+Equipo: **Sergio Sánchez Arango** (autor y desarrollador principal) y **Nicolás Giraldo Tobón** (desarrollador).
 
 > **Regla de negocio central (RF-207):** el LLM **nunca** calcula la nota final. La IA devuelve puntajes parciales por criterio
 > en un JSON validado con Pydantic (`extra="forbid"`), y el backend aplica
@@ -156,6 +156,6 @@ HSTS / nosniff / X-Frame-Options · validación por *magic bytes* · límite de 
 (SRS §8.2: la ejecución, si se requiere, debe ir a contenedores efímeros `--network none --memory 256m --cpus 0.5`) · usuario no-root en Docker.
 
 ## 7. Personalización
-- **Foto del equipo:** guarde `frontend/static/img/team/sergio.jpg` (si no existe, se muestran iniciales).
+- **Fotos del equipo:** guarde `frontend/static/img/team/sergio.jpg` y `frontend/static/img/team/nicolas.jpg` (si no existe, se muestran iniciales).
 - **Más integrantes / abstract:** edite `app/data/project.json`.
 - **Estilos:** tras cambiar clases Tailwind ejecute `./scripts/build_css.sh` (requiere Node.js) y versione `frontend/static/css/app.css`.
