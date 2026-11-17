@@ -647,7 +647,7 @@ async function viewEvaluationDetail(root) {
               <p class="text-xs text-slate-500">${esc(c.competency)} · ponderación <b>${c.weight}%</b> · aporte <b>${c.contribution.toFixed(4)}</b></p></div>
               <div class="flex items-center gap-2">
                 ${c.adjusted ? `<span class="text-xs text-slate-400 line-through" title="Puntaje original IA">${fmt(c.ai_partial_score)}</span>` : ''}
-                ${editable ? `<input type="number" step="0.1" min="0" max="5" value="${c.partial_score}" data-score class="${input} !w-20 !py-1.5 text-center font-bold"/>` : `<span class="text-2xl font-extrabold" style="color:${scoreColor(c.partial_score)}">${fmt(c.partial_score)}</span>`}
+                ${editable ? `<input type="text" inputmode="decimal" autocomplete="off" value="${fmt(c.partial_score)}" data-score class="${input} !w-20 !py-1.5 text-center font-bold" aria-label="Puntaje de 0 a 5"/>` : `<span class="text-2xl font-extrabold" style="color:${scoreColor(c.partial_score)}">${fmt(c.partial_score)}</span>`}
                 <span class="text-slate-400 text-sm">/ 5</span></div></div>
             <blockquote class="mt-3 border-l-4 border-brand-200 bg-brand-50/40 rounded-r-lg px-3 py-2 text-sm italic text-slate-600">“${esc(c.evidence_quote)}”</blockquote>
             <p class="mt-2 text-sm text-slate-600">${esc(c.reasoning)}</p>
@@ -671,16 +671,28 @@ async function viewEvaluationDetail(root) {
     </div>`;
 
   if (!editable) return;
+  // Acepta coma o punto decimal (configuración regional es-CO): "3,5" y "3.5" → 3.5
+  const parseScore = (v) => { const t = String(v).trim().replace(',', '.'); return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN; };
+  const origScore = {};
+  e.criteria_scores.forEach((c) => (origScore[c.criterion_id] = c.partial_score));
   $$('[data-cid]').forEach((box) => {
     const s = $('[data-score]', box), r = $('[data-reason]', box);
-    const orig = s.value;
-    s.addEventListener('input', () => r.classList.toggle('hidden', s.value === orig));
+    s.addEventListener('input', () => {
+      const v = parseScore(s.value);
+      const bad = Number.isNaN(v) || v < 0 || v > 5;
+      s.classList.toggle('!ring-rose-400', bad);
+      r.classList.toggle('hidden', !bad && v === origScore[box.dataset.cid]);
+    });
   });
   $('#btn-adjust').addEventListener('click', async () => {
-    const adjustments = $$('[data-cid]').map((box) => ({ criterion_id: box.dataset.cid, partial_score: parseFloat($('[data-score]', box).value), reason: $('[data-reason]', box).value.trim(), changed: !$('[data-reason]', box).classList.contains('hidden') })).filter((a) => a.changed);
+    const all = $$('[data-cid]').map((box) => ({ criterion_id: box.dataset.cid, name: $('p.font-semibold', box).textContent.trim().replace(box.dataset.cid, '').trim(), partial_score: parseScore($('[data-score]', box).value), reason: $('[data-reason]', box).value.trim() }));
+    const invalid = all.find((a) => Number.isNaN(a.partial_score) || a.partial_score < 0 || a.partial_score > 5);
+    if (invalid) return toast(`Puntaje inválido en "${invalid.name}": use un número entre 0 y 5 (ej. 3,5).`, 'err');
+    const adjustments = all.filter((a) => Math.round(a.partial_score * 10) !== Math.round(origScore[a.criterion_id] * 10))
+      .map((a) => ({ criterion_id: a.criterion_id, partial_score: Math.round(a.partial_score * 10) / 10, reason: a.reason }));
     if (!adjustments.length) return toast('No hay cambios en los puntajes.', 'warn');
-    if (adjustments.some((a) => a.reason.length < 3)) return toast('Cada ajuste requiere una justificación.', 'err');
-    try { await api(`/api/evaluations/${e.id}/adjust`, { method: 'PATCH', body: { adjustments: adjustments.map(({ changed, ...a }) => a) } }); toast('Ajustes guardados. Nota recalculada por el backend.', 'ok'); render(); }
+    if (adjustments.some((a) => a.reason.length < 3)) return toast('Escriba la justificación de cada criterio ajustado (mínimo 3 caracteres).', 'err');
+    try { await api(`/api/evaluations/${e.id}/adjust`, { method: 'PATCH', body: { adjustments } }); toast('Ajustes guardados. Nota recalculada por el backend.', 'ok'); render(); }
     catch (err) { toast(err.message, 'err'); }
   });
   $('#btn-approve').addEventListener('click', async () => {
